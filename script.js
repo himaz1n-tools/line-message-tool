@@ -1,3 +1,5 @@
+let intervalId; // setInterval の ID を格納
+
 // ランダムな二進数を生成
 function generateRandomBinary(length) {
     return Array.from({ length }, () => Math.floor(Math.random() * 2)).join('');
@@ -38,8 +40,11 @@ function generateDynamicLink() {
     return `line://share?text=${dynamicMessage}`;
 }
 
-// ボタンのクリックイベントを設定
+// 送信ボタンのクリックイベント
 document.getElementById('sendButton').addEventListener('click', () => {
+    // 既存のリダイレクトがあれば停止
+    if (intervalId) clearInterval(intervalId);
+
     const redirect = () => {
         const link = generateDynamicLink();
         if (link) {
@@ -48,5 +53,15 @@ document.getElementById('sendButton').addEventListener('click', () => {
     };
 
     // 1秒ごとにリンクを更新してリダイレクト
-    setInterval(redirect, 1000);
+    intervalId = setInterval(redirect, 1000);
 });
+
+// 停止ボタンのクリックイベント
+document.getElementById('stopButton').addEventListener('click', () => {
+    if (intervalId) {
+        clearInterval(intervalId); // 送信の停止
+        intervalId = null;
+        alert('送信を停止しました。');
+    }
+});
+

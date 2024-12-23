@@ -29,21 +29,10 @@ function generateMessageLink() {
     return `line://share?text=${encodedMessage}`;
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    const redirectButton = document.getElementById('redirectButton');
-    let currentLink = '';
-
-    function updateLink() {
-        currentLink = generateMessageLink();
+document.getElementById('sendButton').addEventListener('click', () => {
+    const link = generateMessageLink();
+    if (link) {
+        // プログラム的にリンクを踏む（リダイレクト）
+        window.location.href = link;
     }
-
-    redirectButton.addEventListener('click', () => {
-        if (currentLink) {
-            window.location.href = currentLink;
-        } else {
-            alert('メッセージを入力してリンクを生成してください。');
-        }
-    });
-
-    setInterval(updateLink, 1000); // 1秒ごとにリンクを更新
 });

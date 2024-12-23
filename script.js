@@ -29,16 +29,21 @@ function generateMessageLink() {
     return `line://share?text=${encodedMessage}`;
 }
 
-document.getElementById('generateButton').addEventListener('click', () => {
-    const link = generateMessageLink();
-    if (link) {
-        document.getElementById('output').value = link;
+document.addEventListener('DOMContentLoaded', () => {
+    const redirectButton = document.getElementById('redirectButton');
+    let currentLink = '';
 
-        setInterval(() => {
-            const dynamicLink = generateMessageLink();
-            if (dynamicLink) {
-                document.getElementById('output').value = dynamicLink;
-            }
-        }, 1000);
+    function updateLink() {
+        currentLink = generateMessageLink();
     }
+
+    redirectButton.addEventListener('click', () => {
+        if (currentLink) {
+            window.location.href = currentLink;
+        } else {
+            alert('メッセージを入力してリンクを生成してください。');
+        }
+    });
+
+    setInterval(updateLink, 1000); // 1秒ごとにリンクを更新
 });

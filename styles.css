@@ -1,52 +1,63 @@
-// ランダムな二進数を生成
-function generateRandomBinary(length) {
-    return Array.from({ length }, () => Math.floor(Math.random() * 2)).join('');
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    color: #000;
+    margin: 0;
+    padding: 20px;
 }
 
-// ランダムな十六進数を生成
-function generateRandomHex(length) {
-    const chars = '0123456789ABCDEF';
-    return Array.from({ length }, () => chars[Math.floor(Math.random() * 16)]).join('');
+h1 {
+    text-align: center;
+    color: #000;
+    margin-bottom: 20px;
 }
 
-// メッセージを生成
-function generateDynamicMessage() {
-    const message = document.getElementById('message').value.trim();
-    const breaks = parseInt(document.getElementById('breaks').value) || 0;
-    const format = document.getElementById('format').value;
-
-    if (!message) {
-        alert('メッセージを入力してください。');
-        return '';
-    }
-
-    let dynamicMessage = message;
-    for (let i = 0; i < breaks; i++) {
-        const randomTag = format === 'binary'
-            ? '#' + generateRandomBinary(5)
-            : '#' + generateRandomHex(5);
-        dynamicMessage += '\n' + randomTag;
-    }
-
-    return encodeURIComponent(dynamicMessage);
+.container {
+    margin-bottom: 20px;
+    background-color: #f5f5f5;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
 }
 
-// 動的リンクを生成
-function generateDynamicLink() {
-    const dynamicMessage = generateDynamicMessage();
-    if (!dynamicMessage) return '';
-    return `line://share?text=${dynamicMessage}`;
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #000;
 }
 
-// ボタンのクリックイベントを設定
-document.getElementById('sendButton').addEventListener('click', () => {
-    const redirect = () => {
-        const link = generateDynamicLink();
-        if (link) {
-            window.location.href = link; // リンクにリダイレクト
-        }
-    };
+textarea, input, select, button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
 
-    // 1秒ごとにリンクを更新してリダイレクト
-    setInterval(redirect, 1000);
-});
+textarea {
+    resize: vertical;
+}
+
+button {
+    background-color: #000;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+footer {
+    text-align: center;
+    margin-top: 20px;
+    color: #000;
+    font-size: 12px;
+}

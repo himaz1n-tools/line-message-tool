@@ -15,6 +15,7 @@ function generateRandomHex(length) {
 function generateDynamicMessage() {
     const message = document.getElementById('message').value.trim();
     const breaks = parseInt(document.getElementById('breaks').value) || 0;
+    const lines = parseInt(document.getElementById('lines').value) || 1;
     const format = document.getElementById('format').value;
 
     if (!message) {
@@ -27,7 +28,8 @@ function generateDynamicMessage() {
         const randomTag = format === 'binary'
             ? '#' + generateRandomBinary(5)
             : '#' + generateRandomHex(5);
-        dynamicMessage += '\n' + randomTag;
+
+        dynamicMessage += '\n'.repeat(lines) + randomTag;
     }
 
     return encodeURIComponent(dynamicMessage);

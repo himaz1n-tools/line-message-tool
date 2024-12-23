@@ -66,4 +66,3 @@ document.getElementById('stopButton').addEventListener('click', () => {
         alert('送信を停止しました。');
     }
 });
-

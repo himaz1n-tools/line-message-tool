@@ -14,6 +14,11 @@ function generateRandomNumber(length) {
     return Array.from({ length }, () => Math.floor(Math.random() * 10)).join('');
 }
 
+// ランダムなUnicode文字列を生成
+function generateRandomUnicode(length) {
+    return Array.from({ length }, () => String.fromCharCode(Math.floor(Math.random() * (0xD7FF - 0x0020) + 0x0020))).join('');
+}
+
 // メッセージを生成
 function generateDynamicMessage() {
     const activeTool = document.querySelector('.tool:not(.hidden)').id;
@@ -42,6 +47,9 @@ function generateDynamicMessage() {
     } else if (activeTool === 'numberTool') {
         const digitCount = parseInt(document.getElementById('digitCount').value) || 5;
         return encodeURIComponent(generateRandomNumber(digitCount));
+    } else if (activeTool === 'unicodeTool') {
+        const unicodeLength = parseInt(document.getElementById('unicodeLength').value) || 5;
+        return encodeURIComponent(generateRandomUnicode(unicodeLength));
     }
     return '';
 }
@@ -107,6 +115,7 @@ document.getElementById('stopButton').addEventListener('click', () => {
 
 document.getElementById('textToolButton').addEventListener('click', () => switchTool('textTool'));
 document.getElementById('numberToolButton').addEventListener('click', () => switchTool('numberTool'));
+document.getElementById('unicodeToolButton').addEventListener('click', () => switchTool('unicodeTool'));
 
 // 初期設定
 switchTool('textTool');

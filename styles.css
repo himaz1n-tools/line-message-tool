@@ -81,4 +81,10 @@ footer {
     margin-top: 20px;
     color: #777;
     font-size: 12px;
+    line-height: 1.5;
+}
+
+footer .disclaimer {
+    color: #d9534f;
+    font-weight: bold;
 }

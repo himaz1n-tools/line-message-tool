@@ -1,4 +1,5 @@
-let intervalId;
+let intervalId; // setIntervalのIDを格納
+let sharedCount = 0; // 共有回数のカウント
 
 // ランダムな二進数を生成
 function generateRandomBinary(length) {
@@ -44,26 +45,46 @@ function generateDynamicLink() {
 
 // 送信ボタンのクリックイベント
 document.getElementById('sendButton').addEventListener('click', () => {
+    // 既存のリダイレクトがあれば停止
     if (intervalId) clearInterval(intervalId);
 
-    const speed = parseInt(document.getElementById('speed').value) || 1000;
+    const speed = parseInt(document.getElementById('speed').value);
+    const countInput = document.getElementById('count').value.trim();
+    const isInfinite = countInput.toUpperCase() === 'A';
+    const maxCount = isInfinite ? Infinity : parseInt(countInput);
+
+    if (!isInfinite && (isNaN(maxCount) || maxCount <= 0)) {
+        alert('有効な共有回数を入力してください (例: 10 または A)。');
+        return;
+    }
+
+    sharedCount = 0;
 
     const redirect = () => {
+        if (sharedCount >= maxCount) {
+            clearInterval(intervalId);
+            intervalId = null;
+            alert('指定された回数の共有が完了しました。');
+            return;
+        }
+
         const link = generateDynamicLink();
         if (link) {
-            window.location.href = link;
+            window.location.href = link; // リンクにリダイレクト
+            sharedCount++;
         }
     };
 
+    // 指定された速度でリンクを更新してリダイレクト
     intervalId = setInterval(redirect, speed);
 });
 
 // 停止ボタンのクリックイベント
 document.getElementById('stopButton').addEventListener('click', () => {
     if (intervalId) {
-        clearInterval(intervalId);
+        clearInterval(intervalId); // 送信の停止
         intervalId = null;
         alert('送信を停止しました。');
-        window.location.href = "https://example.com"; // 停止後のリダイレクト先URL
     }
 });
+

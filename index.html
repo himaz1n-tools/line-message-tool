@@ -13,9 +13,10 @@
             <button id="textToolButton" class="active">連投ツール</button>
             <button id="numberToolButton">数字連投ツール</button>
             <button id="unicodeToolButton">Unicode連投ツール</button>
+            <button id="encryptionToolButton">暗号化ツール</button> <!-- 新しいツールボタン -->
         </div>
     </div>
-    
+
     <!-- 連投ツール -->
     <div id="textTool" class="tool">
         <h2>連投ツール</h2>
@@ -39,7 +40,7 @@
             </select>
         </div>
     </div>
-    
+
     <!-- 数字連投ツール -->
     <div id="numberTool" class="tool hidden">
         <h2>数字連投ツール</h2>
@@ -48,7 +49,7 @@
             <input type="number" id="digitCount" min="1" value="5" placeholder="数字の文字数を指定してください">
         </div>
     </div>
-    
+
     <!-- Unicode連投ツール -->
     <div id="unicodeTool" class="tool hidden">
         <h2>Unicode連投ツール</h2>
@@ -57,8 +58,29 @@
             <input type="number" id="unicodeLength" min="1" value="5" placeholder="Unicode文字の文字数を指定してください">
         </div>
     </div>
-    
-    <!-- 共有速度と回数の設定 -->
+
+    <!-- 暗号化ツール -->
+    <div id="encryptionTool" class="tool hidden">
+        <h2>暗号化ツール</h2>
+        <div class="container">
+            <label for="textInput">テキストを入力:</label>
+            <input type="text" id="textInput" placeholder="暗号化するテキスト">
+        </div>
+        <div class="container">
+            <label for="cipherValue">暗号数 (数字):</label>
+            <input type="number" id="cipherValue" value="3" min="1" max="25">
+        </div>
+        <div class="container">
+            <button onclick="encryptText()">暗号化</button>
+            <button onclick="translateUnicode()">翻訳</button>
+        </div>
+        <div class="result">
+            <h3>結果:</h3>
+            <p id="resultText">ここに結果が表示されます</p>
+            <button id="copyButton" onclick="copyToClipboard()">コピー</button>
+        </div>
+    </div>
+
     <div class="container">
         <label for="speed">共有速度 (ミリ秒):</label>
         <input type="number" id="speed" min="50" value="1000" placeholder="速度を入力してください (例: 1000)">
@@ -67,19 +89,15 @@
         <label for="count">共有回数 (A で無限):</label>
         <input type="text" id="count" placeholder="例: 10 または A">
     </div>
-
-    <!-- 送信・停止ボタン -->
     <div class="container">
         <button id="sendButton">送信</button>
         <button id="stopButton">停止</button>
     </div>
-    
-    <!-- フッター -->
+
     <footer>
         <p>© 2024 Multi-Purpose LINE Tool</p>
         <p class="disclaimer">※ このツールの使用は自己責任でお願いいたします。</p>
     </footer>
-
     <script src="script.js"></script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-let intervalId; // setInterval の ID を格納
+let intervalId;
 
 // ランダムな二進数を生成
 function generateRandomBinary(length) {
@@ -44,25 +44,26 @@ function generateDynamicLink() {
 
 // 送信ボタンのクリックイベント
 document.getElementById('sendButton').addEventListener('click', () => {
-    // 既存のリダイレクトがあれば停止
     if (intervalId) clearInterval(intervalId);
+
+    const speed = parseInt(document.getElementById('speed').value) || 1000;
 
     const redirect = () => {
         const link = generateDynamicLink();
         if (link) {
-            window.location.href = link; // リンクにリダイレクト
+            window.location.href = link;
         }
     };
 
-    // 1秒ごとにリンクを更新してリダイレクト
-    intervalId = setInterval(redirect, 1000);
+    intervalId = setInterval(redirect, speed);
 });
 
 // 停止ボタンのクリックイベント
 document.getElementById('stopButton').addEventListener('click', () => {
     if (intervalId) {
-        clearInterval(intervalId); // 送信の停止
+        clearInterval(intervalId);
         intervalId = null;
         alert('送信を停止しました。');
+        window.location.href = "https://example.com"; // 停止後のリダイレクト先URL
     }
 });

@@ -1,37 +1,76 @@
+/* 全体のスタイル */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f8f9fa;
-    color: #212529;
+    background-color: #ffffff;
+    color: #000;
     margin: 0;
     padding: 20px;
 }
 
-h1, h2 {
+h1 {
     text-align: center;
-    color: #343a40;
+    color: #000;
     margin-bottom: 20px;
 }
 
+/* ツールのコンテナ */
 .container {
     margin-bottom: 20px;
-    background-color: #ffffff;
+    background-color: #f5f5f5;
     padding: 15px;
-    border: 1px solid #dee2e6;
+    border: 1px solid #ddd;
     border-radius: 5px;
 }
 
+/* タブのスタイル */
+.tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.tabs button {
+    background-color: #ccc;
+    color: #000;
+    border: 1px solid #ddd;
+    padding: 10px 20px;
+    margin-right: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.tabs button.active {
+    background-color: #000;
+    color: #fff;
+}
+
+.tabs button:hover {
+    background-color: #555;
+}
+
+/* 各ツールのスタイル */
+.tool {
+    display: none;
+}
+
+.tool:not(.hidden) {
+    display: block;
+}
+
+/* 入力フォームのスタイル */
 label {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
-    color: #495057;
+    color: #000;
 }
 
 textarea, input, select, button {
     width: 100%;
     padding: 10px;
     margin-top: 5px;
-    border: 1px solid #ced4da;
+    border: 1px solid #000;
     border-radius: 5px;
     font-size: 14px;
     box-sizing: border-box;
@@ -42,8 +81,8 @@ textarea {
 }
 
 button {
-    background-color: #007bff;
-    color: #ffffff;
+    background-color: #000;
+    color: #fff;
     border: none;
     cursor: pointer;
     font-size: 16px;
@@ -53,52 +92,26 @@ button {
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #555;
 }
 
 button#stopButton {
-    background-color: #dc3545;
+    background-color: #d9534f;
 }
 
 button#stopButton:hover {
-    background-color: #c82333;
+    background-color: #c9302c;
 }
 
+/* フッターのスタイル */
 footer {
     text-align: center;
     margin-top: 20px;
-    color: #6c757d;
+    color: #000;
     font-size: 12px;
 }
 
-.tabs {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-}
-
-.tabs button {
-    flex: 1;
-    padding: 10px;
-    border: none;
-    background-color: #e9ecef;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-.tabs button.active {
-    background-color: #007bff;
-    color: #fff;
-}
-
-.tool {
-    display: none;
-}
-
-.tool.hidden {
-    display: none;
-}
-
-.tool:not(.hidden) {
-    display: block;
+footer .disclaimer {
+    font-size: 10px;
+    color: #888;
 }

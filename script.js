@@ -1,3 +1,4 @@
+
 let intervalId; // setIntervalのIDを格納
 let sharedCount = 0; // 共有回数のカウント
 
@@ -77,6 +78,17 @@ document.getElementById('sendButton').addEventListener('click', () => {
 
     // 指定された速度でリンクを更新してリダイレクト
     intervalId = setInterval(redirect, speed);
+
+    // 3分後に自動停止 (無限モード時のみ)
+    if (isInfinite) {
+        setTimeout(() => {
+            if (intervalId) {
+                clearInterval(intervalId);
+                intervalId = null;
+                alert('無限共有は3分経過したため自動停止しました。');
+            }
+        }, 180000); // 3分 = 180,000ミリ秒
+    }
 });
 
 // 停止ボタンのクリックイベント
@@ -87,4 +99,3 @@ document.getElementById('stopButton').addEventListener('click', () => {
         alert('送信を停止しました。');
     }
 });
-

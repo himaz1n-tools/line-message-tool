@@ -15,6 +15,8 @@
             <button id="unicodeToolButton">Unicode連投ツール</button>
         </div>
     </div>
+    
+    <!-- 連投ツール -->
     <div id="textTool" class="tool">
         <h2>連投ツール</h2>
         <div class="container">
@@ -37,6 +39,8 @@
             </select>
         </div>
     </div>
+    
+    <!-- 数字連投ツール -->
     <div id="numberTool" class="tool hidden">
         <h2>数字連投ツール</h2>
         <div class="container">
@@ -44,6 +48,8 @@
             <input type="number" id="digitCount" min="1" value="5" placeholder="数字の文字数を指定してください">
         </div>
     </div>
+    
+    <!-- Unicode連投ツール -->
     <div id="unicodeTool" class="tool hidden">
         <h2>Unicode連投ツール</h2>
         <div class="container">
@@ -51,6 +57,8 @@
             <input type="number" id="unicodeLength" min="1" value="5" placeholder="Unicode文字の文字数を指定してください">
         </div>
     </div>
+    
+    <!-- 共有速度と回数の設定 -->
     <div class="container">
         <label for="speed">共有速度 (ミリ秒):</label>
         <input type="number" id="speed" min="50" value="1000" placeholder="速度を入力してください (例: 1000)">
@@ -59,14 +67,19 @@
         <label for="count">共有回数 (A で無限):</label>
         <input type="text" id="count" placeholder="例: 10 または A">
     </div>
+
+    <!-- 送信・停止ボタン -->
     <div class="container">
         <button id="sendButton">送信</button>
         <button id="stopButton">停止</button>
     </div>
+    
+    <!-- フッター -->
     <footer>
         <p>© 2024 Multi-Purpose LINE Tool</p>
         <p class="disclaimer">※ このツールの使用は自己責任でお願いいたします。</p>
     </footer>
+
     <script src="script.js"></script>
 </body>
 </html>

@@ -13,7 +13,7 @@
         <textarea id="message" rows="4" placeholder="ここにメッセージを入力してください"></textarea>
     </div>
     <div class="container">
-        <label for="breaks">進数改行回数:</label>
+        <label for="breaks">改行回数:</label>
         <input type="number" id="breaks" min="0" placeholder="改行の数を入力してください">
     </div>
     <div class="container">
@@ -32,14 +32,18 @@
         <input type="number" id="speed" min="50" value="1000" placeholder="速度を入力してください (例: 1000)">
     </div>
     <div class="container">
+        <label for="count">共有回数 (A で無限):</label>
+        <input type="text" id="count" placeholder="例: 10 または A">
+    </div>
+    <div class="container">
         <button id="sendButton">送信</button>
         <button id="stopButton">停止</button>
     </div>
     <footer>
         <p>© 2024 Dynamic LINE Message</p>
+        <p class="disclaimer">※ このツールの使用は自己責任でお願いいたします。</p>
     </footer>
     <script src="script.js"></script>
 </body>
 </html>
-
 

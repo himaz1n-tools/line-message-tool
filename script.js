@@ -1,40 +1,49 @@
-
 let intervalId; // setIntervalのIDを格納
 let sharedCount = 0; // 共有回数のカウント
 
-// ランダムな二進数を生成
-function generateRandomBinary(length) {
-    return Array.from({ length }, () => Math.floor(Math.random() * 2)).join('');
+function switchTool(tool) {
+    document.querySelectorAll('.tool').forEach(t => t.classList.add('hidden'));
+    document.getElementById(tool).classList.remove('hidden');
+
+    document.querySelectorAll('.tabs button').forEach(btn => btn.classList.remove('active'));
+    document.getElementById(`${tool}Button`).classList.add('active');
 }
 
-// ランダムな十六進数を生成
-function generateRandomHex(length) {
-    const chars = '0123456789ABCDEF';
-    return Array.from({ length }, () => chars[Math.floor(Math.random() * 16)]).join('');
+// ランダムな数字を生成
+function generateRandomNumber(length) {
+    return Array.from({ length }, () => Math.floor(Math.random() * 10)).join('');
 }
 
 // メッセージを生成
 function generateDynamicMessage() {
-    const message = document.getElementById('message').value.trim();
-    const breaks = parseInt(document.getElementById('breaks').value) || 0;
-    const lines = parseInt(document.getElementById('lines').value) || 1;
-    const format = document.getElementById('format').value;
+    const activeTool = document.querySelector('.tool:not(.hidden)').id;
 
-    if (!message) {
-        alert('メッセージを入力してください。');
-        return '';
+    if (activeTool === 'textTool') {
+        const message = document.getElementById('message').value.trim();
+        const breaks = parseInt(document.getElementById('breaks').value) || 0;
+        const lines = parseInt(document.getElementById('lines').value) || 1;
+        const format = document.getElementById('format').value;
+
+        if (!message) {
+            alert('メッセージを入力してください。');
+            return '';
+        }
+
+        let dynamicMessage = message;
+        for (let i = 0; i < breaks; i++) {
+            const randomTag = format === 'binary'
+                ? '#' + Array.from({ length: 5 }, () => Math.floor(Math.random() * 2)).join('')
+                : '#' + Array.from({ length: 5 }, () => '0123456789ABCDEF'[Math.floor(Math.random() * 16)]).join('');
+
+            dynamicMessage += '\n'.repeat(lines) + randomTag;
+        }
+
+        return encodeURIComponent(dynamicMessage);
+    } else if (activeTool === 'numberTool') {
+        const digitCount = parseInt(document.getElementById('digitCount').value) || 5;
+        return encodeURIComponent(generateRandomNumber(digitCount));
     }
-
-    let dynamicMessage = message;
-    for (let i = 0; i < breaks; i++) {
-        const randomTag = format === 'binary'
-            ? '#' + generateRandomBinary(5)
-            : '#' + generateRandomHex(5);
-
-        dynamicMessage += '\n'.repeat(lines) + randomTag;
-    }
-
-    return encodeURIComponent(dynamicMessage);
+    return '';
 }
 
 // 動的リンクを生成
@@ -44,9 +53,8 @@ function generateDynamicLink() {
     return `line://share?text=${dynamicMessage}`;
 }
 
-// 送信ボタンのクリックイベント
+// イベントハンドラー
 document.getElementById('sendButton').addEventListener('click', () => {
-    // 既存のリダイレクトがあれば停止
     if (intervalId) clearInterval(intervalId);
 
     const speed = parseInt(document.getElementById('speed').value);
@@ -71,15 +79,13 @@ document.getElementById('sendButton').addEventListener('click', () => {
 
         const link = generateDynamicLink();
         if (link) {
-            window.location.href = link; // リンクにリダイレクト
+            window.location.href = link;
             sharedCount++;
         }
     };
 
-    // 指定された速度でリンクを更新してリダイレクト
     intervalId = setInterval(redirect, speed);
 
-    // 3分後に自動停止 (無限モード時のみ)
     if (isInfinite) {
         setTimeout(() => {
             if (intervalId) {
@@ -87,15 +93,20 @@ document.getElementById('sendButton').addEventListener('click', () => {
                 intervalId = null;
                 alert('無限共有は3分経過したため自動停止しました。');
             }
-        }, 180000); // 3分 = 180,000ミリ秒
+        }, 180000);
     }
 });
 
-// 停止ボタンのクリックイベント
 document.getElementById('stopButton').addEventListener('click', () => {
     if (intervalId) {
-        clearInterval(intervalId); // 送信の停止
+        clearInterval(intervalId);
         intervalId = null;
         alert('送信を停止しました。');
     }
 });
+
+document.getElementById('textToolButton').addEventListener('click', () => switchTool('textTool'));
+document.getElementById('numberToolButton').addEventListener('click', () => switchTool('numberTool'));
+
+// 初期設定
+switchTool('textTool');

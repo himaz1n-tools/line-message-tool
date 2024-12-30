@@ -1,3 +1,4 @@
+/* 全体のスタイル */
 body {
     font-family: Arial, sans-serif;
     background-color: #ffffff;
@@ -8,9 +9,20 @@ body {
 
 h1 {
     text-align: center;
+    color: #000;
     margin-bottom: 20px;
 }
 
+/* ツールのコンテナ */
+.container {
+    margin-bottom: 20px;
+    background-color: #f5f5f5;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+/* タブのスタイル */
 .tabs {
     display: flex;
     justify-content: center;
@@ -37,6 +49,7 @@ h1 {
     background-color: #555;
 }
 
+/* 各ツールのスタイル */
 .tool {
     display: none;
 }
@@ -45,12 +58,33 @@ h1 {
     display: block;
 }
 
+/* 入力フォームのスタイル */
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #000;
+}
+
+textarea, input, select, button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+textarea {
+    resize: vertical;
+}
+
 button {
     background-color: #000;
     color: #fff;
     border: none;
     cursor: pointer;
-    padding: 10px 20px;
     font-size: 16px;
     font-weight: bold;
     margin-top: 10px;
@@ -61,6 +95,15 @@ button:hover {
     background-color: #555;
 }
 
+button#stopButton {
+    background-color: #d9534f;
+}
+
+button#stopButton:hover {
+    background-color: #c9302c;
+}
+
+/* フッターのスタイル */
 footer {
     text-align: center;
     margin-top: 20px;

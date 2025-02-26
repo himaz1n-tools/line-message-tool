@@ -1,5 +1,5 @@
 let intervalId; // setIntervalのIDを格納
-let sharedCount = 0; // 共有回数のカウント
+let sharedCount = 0; // 共有回数をカウントする
 
 function switchTool(tool) {
     document.querySelectorAll('.tool').forEach(t => t.classList.add('hidden'));
@@ -9,17 +9,17 @@ function switchTool(tool) {
     document.getElementById(`${tool}Button`).classList.add('active');
 }
 
-// ランダムな数字を生成
+// ランダムで数字を生成
 function generateRandomNumber(length) {
     return Array.from({ length }, () => Math.floor(Math.random() * 10)).join('');
 }
 
-// ランダムなUnicode文字列を生成
+// Unicodeをランダムに生成する。
 function generateRandomUnicode(length) {
     return Array.from({ length }, () => String.fromCharCode(Math.floor(Math.random() * (0xD7FF - 0x0020) + 0x0020))).join('');
 }
 
-// メッセージを生成
+// メッセージ生成
 function generateDynamicMessage() {
     const activeTool = document.querySelector('.tool:not(.hidden)').id;
 
@@ -54,7 +54,7 @@ function generateDynamicMessage() {
     return '';
 }
 
-// 動的リンクを生成
+// リンクを生成。
 function generateDynamicLink() {
     const dynamicMessage = generateDynamicMessage();
     if (!dynamicMessage) return '';
